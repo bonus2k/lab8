@@ -1,0 +1,21 @@
+POST /api/user HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "password": "pass"
+}
+
+###
+GET /api/user/{userID} HTTP/1.1
+Host: localhost:8080
+
+###
+GET /api/user HTTP/1.1
+Host: localhost:8080
+
+###
+GET / HTTP/1.1
+Host: localhost:8080

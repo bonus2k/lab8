@@ -1,8 +1,9 @@
-package repository
+package repositories
 
 import (
 	"context"
 	"github.com/bonus2k/lab8/internal/models"
+	"github.com/google/uuid"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"sync"
@@ -11,7 +12,7 @@ import (
 
 type UserRepository interface {
 	CreateUser(ctx context.Context, user *models.User) error
-	GetUser(ctx context.Context, id int) (*models.User, error)
+	GetUser(ctx context.Context, id uuid.UUID) (*models.User, error)
 	GetAllUsers(ctx context.Context) ([]models.User, error)
 }
 
@@ -32,7 +33,7 @@ func (u *UserRepositoryImpl) CreateUser(ctx context.Context, user *models.User) 
 	return nil
 }
 
-func (u *UserRepositoryImpl) GetUser(ctx context.Context, id int) (*models.User, error) {
+func (u *UserRepositoryImpl) GetUser(ctx context.Context, id uuid.UUID) (*models.User, error) {
 	var user models.User
 	result := u.db.WithContext(ctx).First(&user, id)
 	if result.Error != nil {
